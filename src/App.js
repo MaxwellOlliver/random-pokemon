@@ -24,7 +24,7 @@ function App() {
   }, [randomPokemon]);
 
   const getRandomPokemonRef = async () => {
-    const randomLimit = Math.round(Math.random() * 1118);
+    const randomLimit = Math.round(Math.random() * 1119);
     const url = `https://pokeapi.co/api/v2/pokemon?limit=${randomLimit}`;
     const response = await fetch(url);
     const data = await response.json();
