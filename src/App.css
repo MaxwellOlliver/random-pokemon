@@ -19,8 +19,7 @@ body {
   justify-content: center;
   flex-direction: column;
   transition: all 0.3s;
-  background-color: #f5f5f5;
-  background: none;
+  background-color: #ccc;
 }
 
 .container > img {
@@ -58,6 +57,7 @@ body {
   justify-content: center;
   flex-direction: column;
   padding: 10px;
+  box-shadow: 0 0 10px 3px #00000010;
 }
 
 .pokemon > img {
