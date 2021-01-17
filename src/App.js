@@ -49,12 +49,27 @@ function App() {
     setLoading(false);
   };
 
+  const handleShare = async () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: 'web.dev',
+          text: 'Check out web.dev.',
+          url: 'https://web.dev/',
+        })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    }
+  };
+
   return (
     <div className="container" style={background}>
       <img src={logo} alt="logo" />
       <button onClick={handleGetRandomPokemon} disabled={loading}>
         Get a random pokémon
       </button>
+
+      <button onClick={handleShare}>share</button>
       <div className="pokemon">
         {loading && (
           <div className="loader">
