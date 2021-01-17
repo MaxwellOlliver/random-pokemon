@@ -53,6 +53,9 @@ function App() {
     if (navigator.share) {
       navigator
         .share({
+          files: [
+            'https://generate-pdf-api.herokuapp.com/pdf/c0c1ae95-1dcb-4ba5-842f-eb95c8d7b319.pdf',
+          ],
           title: 'web.dev',
           text: 'Check out web.dev.',
           url: 'https://web.dev/',
