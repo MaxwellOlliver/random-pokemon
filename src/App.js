@@ -9,6 +9,7 @@ import noPicture from './assets/no-photo.webp';
 function App() {
   const [loading, setLoading] = useState(false);
   const [randomPokemon, setRandomPokemon] = useState(null);
+  const [imgIsDone, setImgIsDone] = useState(false);
 
   const background = useMemo(() => {
     if (randomPokemon) {
@@ -44,6 +45,7 @@ function App() {
     const pokemonRef = await getRandomPokemonRef();
     const pokemon = await getPokemonInfo(pokemonRef.url);
 
+    setImgIsDone(false);
     setRandomPokemon(pokemon);
 
     setLoading(false);
@@ -55,22 +57,26 @@ function App() {
         Get a random pokémon
       </button>
       <div className="pokemon">
-        {loading && (
-          <div className="loader">
-            <img src={pokeball} alt="pokeball" className="poke-loader" />
-          </div>
-        )}
         {!randomPokemon ? (
           <h3>Click on "Get a random pokémon"</h3>
         ) : (
           <>
+            {(loading || !imgIsDone) && (
+              <div className="loader">
+                <img src={pokeball} alt="pokeball" className="poke-loader" />
+              </div>
+            )}
             {randomPokemon.sprites.other['official-artwork']?.front_default ? (
-              <img
-                src={
-                  randomPokemon.sprites.other['official-artwork']?.front_default
-                }
-                alt="pokemon"
-              />
+              <>
+                <img
+                  src={
+                    randomPokemon.sprites.other['official-artwork']
+                      ?.front_default
+                  }
+                  onLoad={() => setImgIsDone(true)}
+                  alt="pokemon"
+                />
+              </>
             ) : (
               <div className="no-profile">
                 <img src={noPicture} alt="pokemon" />
