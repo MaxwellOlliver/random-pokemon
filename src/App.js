@@ -24,16 +24,9 @@ function App() {
     }
   }, [randomPokemon]);
 
-  const getRandomPokemonRef = async () => {
-    const randomLimit = Math.round(Math.random() * 1119);
-    const url = `https://pokeapi.co/api/v2/pokemon?limit=${randomLimit}`;
-    const response = await fetch(url);
-    const data = await response.json();
-
-    return data.results[randomLimit - 1];
-  };
-
-  const getPokemonInfo = async (url) => {
+  const getRandomPokemon = async () => {
+    const randomId = Math.round(Math.random() * 890);
+    const url = `https://pokeapi.co/api/v2/pokemon/${randomId}`;
     const response = await fetch(url);
     const data = await response.json();
 
@@ -42,8 +35,7 @@ function App() {
 
   const handleGetRandomPokemon = async () => {
     setLoading(true);
-    const pokemonRef = await getRandomPokemonRef();
-    const pokemon = await getPokemonInfo(pokemonRef.url);
+    const pokemon = await getRandomPokemon();
 
     setImgIsDone(false);
     setRandomPokemon(pokemon);
@@ -85,8 +77,8 @@ function App() {
             <div className="info">
               <span>{randomPokemon.species.name}</span>
               <div className="types">
-                {randomPokemon.types.map((type) => (
-                  <span style={{ backgroundColor: getColorByType(type) }}>
+                {randomPokemon.types.map((type, idx) => (
+                  <span style={{ backgroundColor: getColorByType(type) }} key={idx}>
                     {type.type.name}
                   </span>
                 ))}
